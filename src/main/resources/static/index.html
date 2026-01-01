@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Weather Search App</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+
+<div class="container">
+    <h1>🌦 Weather Search</h1>
+
+    <div class="search-box">
+        <input id="cityInput" placeholder="Enter city name" type="text">
+        <button onclick="getWeather()">Search</button>
+    </div>
+
+    <div class="error" id="error"></div>
+
+    <div class="weather-card hidden" id="weatherCard">
+        <h2 id="location"></h2>
+        <p id="description"></p>
+
+        <div class="details">
+            <p><strong>Temperature:</strong> <span id="temp"></span> °C</p>
+            <p><strong>Feels Like:</strong> <span id="feelsLike"></span> °C</p>
+            <p><strong>Humidity:</strong> <span id="humidity"></span>%</p>
+            <p><strong>Pressure:</strong> <span id="pressure"></span> hPa</p>
+            <p><strong>Wind Speed:</strong> <span id="wind"></span> m/s</p>
+            <p><strong>Cloudiness:</strong> <span id="clouds"></span>%</p>
+            <p><strong>Visibility:</strong> <span id="visibility"></span> m</p>
+        </div>
+
+        <details>
+            <summary>View Raw API Response</summary>
+            <pre id="rawResponse"></pre>
+        </details>
+    </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>

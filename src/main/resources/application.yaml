@@ -1,6 +1,8 @@
 spring:
   application:
     name: weather-search-app
+server:
+  port: 8080
 cache:
   expiry:
     second: 300
