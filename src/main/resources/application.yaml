@@ -2,12 +2,12 @@ spring:
   application:
     name: weather-search-app
 server:
-  port: 8080
+  port: 8080  # Port to run application on local machine
 cache:
   expiry:
-    second: 300
+    second: 300   # Mention time to expire cache in seconds
 weather:
   api:
     base-url: http://api.openweathermap.org/data/2.5/weather
-    key: XXXXXXXXXX
+    key: YOUR_OPENWEATHER_API_KEY   #Replace with Actual API Key
     units: metric
