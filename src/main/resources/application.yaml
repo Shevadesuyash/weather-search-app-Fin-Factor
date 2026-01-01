@@ -1,3 +1,11 @@
 spring:
   application:
     name: weather-search-app
+cache:
+  expiry:
+    second: 300
+weather:
+  api:
+    base-url: http://api.openweathermap.org/data/2.5/weather
+    key: XXXXXXXXXX
+    units: metric
