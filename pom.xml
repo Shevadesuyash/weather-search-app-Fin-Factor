@@ -73,7 +73,36 @@
 					</excludes>
 				</configuration>
 			</plugin>
-		</plugins>
+            <plugin>
+                <groupId>com.google.cloud.tools</groupId>
+                <artifactId>jib-maven-plugin</artifactId>
+                <version>3.4.0</version>
+
+                <configuration>
+                    <!-- Base image -->
+                    <from>
+                        <image>eclipse-temurin:17-jre</image>
+                    </from>
+
+                    <!-- Target image name -->
+                    <to>
+                        <image>weather-search-app</image>
+                    </to>
+
+                    <!-- Container configuration -->
+                    <container>
+                        <ports>
+                            <port>8080</port>
+                        </ports>
+
+                        <environment>
+                            <WEATHER_API_KEY>${WEATHER_API_KEY}</WEATHER_API_KEY>
+                        </environment>
+                    </container>
+                </configuration>
+            </plugin>
+
+        </plugins>
 	</build>
 
 </project>
