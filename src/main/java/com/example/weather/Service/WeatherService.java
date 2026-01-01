@@ -10,6 +10,7 @@ import java.util.Map;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.HttpStatusCodeException;
 import org.springframework.web.client.RestTemplate;
 
 @Slf4j
@@ -18,12 +19,16 @@ public class WeatherService {
 
   private final RestTemplate restTemplate;
   private final Map<String, CachedWeather> cache = new HashMap<>();
+
   @Value("${weather.api.base-url}")
   private String baseUrl;
+
   @Value("${weather.api.key}")
   private String apiKey;
+
   @Value("${weather.api.units}")
   private String units;
+
   @Value("${cache.expiry.second}")
   private long cacheExpirySeconds;
 
@@ -40,12 +45,16 @@ public class WeatherService {
       CachedWeather cached = cache.get(cityKey);
       if (!cached.isExpired(cacheExpirySeconds)) {
         return cached.getWeatherResponse();
-      }else {log.info("Cache expired");}
+      } else {
+        log.info("Cache expired");
+      }
     }
     WeatherResponse response;
     try {
       log.info("Calling Weather Api");
       response = callApiRequest(cityKey);
+    } catch (CityNotFoundException | WeatherServiceException e) {
+      throw e;
     } catch (Exception e) {
       throw new Exception(e);
     }
@@ -58,24 +67,24 @@ public class WeatherService {
 
     try {
       JsonNode response = restTemplate.getForObject(url, JsonNode.class);
-      log.info("Weather api response received");
-      int statusCode = response.path("cod").asInt();
-      if (statusCode == 200) {
-        return mapResponseToWeatherResponse(response, city);
-      }
+      log.info("Weather API response received");
+
+      return mapResponseToWeatherResponse(response, city);
+
+    } catch (HttpStatusCodeException e) {
+
+      int statusCode = e.getStatusCode().value();
+      log.error("Weather API error: {}", e.getResponseBodyAsString());
+
       if (statusCode == 404) {
         throw new CityNotFoundException(city);
       }
-
       throw new WeatherServiceException(
           "Weather service is currently unavailable. Please try again later.");
 
-    } catch (CityNotFoundException | WeatherServiceException e) {
-      log.error(e.getMessage());
-      throw e;
     } catch (Exception e) {
-        log.error(e.getMessage());
-      throw new Exception("Unable to process weather request at the moment.");
+      log.error("Unexpected error", e);
+      throw new WeatherServiceException("Unable to process weather request at the moment.");
     }
   }
 
