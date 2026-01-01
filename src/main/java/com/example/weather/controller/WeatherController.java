@@ -22,6 +22,11 @@ public class WeatherController {
     this.weatherService = weatherService;
   }
 
+  @GetMapping("/")
+  public String index() {
+    return "redirect:/index.html";
+  }
+
   @GetMapping()
   public ResponseEntity<?> getWeatherByCity(@RequestParam String city) {
 
