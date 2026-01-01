@@ -2,7 +2,7 @@
 
 A full-stack **Weather Search Application** built using **Java Spring Boot** that allows users to search for **current
 weather information by city name**.  
-The application integrates with the **OpenWeatherMap API**, implements **caching for performance**, and provides a 
+The application integrates with the **OpenWeatherMap API**, implements **caching for performance**, and provides a
 **simple web-based UI** to display weather details.
 ---
 
@@ -134,3 +134,85 @@ Response:
 
 ---
 
+## 🐳 Run the Application Using Docker
+
+The application is available as a Docker image on Docker Hub.
+
+### 📦 Docker Image
+
+```
+suyash30/weather-search-app:0.1
+```
+
+---
+
+### 1️⃣ Prerequisites
+
+* Docker installed on your system
+* Internet connection (to access OpenWeather API)
+
+Verify Docker installation:
+
+```bash
+docker --version
+```
+
+---
+
+### 2️⃣ Pull the Docker Image
+
+```bash
+docker pull suyash30/weather-search-app:0.1
+```
+
+---
+
+### 3️⃣ Run the Docker Container
+
+> Replace `YOUR_OPENWEATHER_API_KEY` with your actual API key.
+
+```bash
+docker run -p 8080:8080 -e WEATHER_API_KEY=YOUR_OPENWEATHER_API_KEY suyash30/weather-search-app:0.1
+```
+
+---
+
+### 4️⃣ Access the Application
+
+* **Web UI**
+
+  ```
+  http://localhost:8080
+  ```
+
+* **Backend API**
+
+  ```
+  http://localhost:8080/api/weather?city=Pune
+  ```
+
+---
+
+### 5️⃣ Stop the Container
+
+Press:
+
+```
+Ctrl + C
+```
+
+or run:
+
+```bash
+docker ps
+docker stop <container_id>
+```
+
+---
+
+## ✔ Notes
+
+* No local Java or Maven setup is required when using Docker
+* The application runs entirely inside the container
+
+---
