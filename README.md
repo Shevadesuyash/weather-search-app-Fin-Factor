@@ -39,14 +39,6 @@ The application integrates with the **OpenWeatherMap API**, implements **caching
 
 ---
 
-Perfect 👍
-Below is a **clean, focused README section** that explains **ONLY how to run the project on a local machine**, written
-in **simple, reviewer-friendly language**.
-
-You can **paste this directly** into your existing `README.md` under a heading like **“How to Run Locally”**.
-
----
-
 ## ▶️ How to Run the Application Locally
 
 ### ✅ Prerequisites
